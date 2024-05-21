@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuthContext } from "@/lib/AuthContextProvider";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -8,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,6 +23,12 @@ const formSchema = z.object({
 });
 
 export default function Page() {
+  const { isAuthenticated, login } = useAuthContext();
+  console.log(isAuthenticated);
+  const router = useRouter();
+  if (isAuthenticated) {
+    router.push("/dashboard");
+  }
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,6 +54,7 @@ export default function Page() {
         console.log(json.error);
       }
       if (response.ok) {
+        login();
         console.log(json);
         // save the user to local storage
         // localStorage.setItem('user', JSON.stringify(json))
