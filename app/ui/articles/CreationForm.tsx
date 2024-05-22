@@ -25,8 +25,9 @@ import {
 } from "@/components/ui/select";
 
 const formSchema = z.object({
-  slug: z.string().min(5).max(40),
-  title: z.string().min(5).max(40),
+  slug: z.string().min(4).max(40),
+  title: z.string().min(4).max(40),
+  coverUrl: z.string().url(),
   introduction: z.string().min(50).max(120),
   author: z.string().min(1).max(20),
   read: z.string().min(1).max(2),
@@ -41,6 +42,7 @@ export function CreationForm() {
     defaultValues: {
       slug: "",
       title: "",
+      coverUrl: "",
       introduction: "",
       author: "",
       read: "",
@@ -104,6 +106,20 @@ export function CreationForm() {
                 <Input placeholder="标题" {...field} />
               </FormControl>
               <FormDescription>40字以内</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="coverUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>封面图URL</FormLabel>
+              <FormControl>
+                <Input placeholder="封面图URL" {...field} />
+              </FormControl>
+              <FormDescription></FormDescription>
               <FormMessage />
             </FormItem>
           )}
