@@ -21,7 +21,10 @@ export default function AuthContextProvider({
     // Check initial authentication status when the app loads
     const checkAuthStatus = async () => {
       try {
-        const response = await fetch("localhost:4000/admin/auth/status");
+        const response = await fetch(
+          "http://localhost:4000/admin/auth/status",
+          { credentials: "include" }
+        );
         const result = await response.json();
         if (result.isAuthenticated) {
           setIsAuthenticated(true);
