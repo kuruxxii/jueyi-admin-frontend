@@ -24,7 +24,6 @@ const formSchema = z.object({
 
 export default function Page() {
   const { isAuthenticated, login } = useAuthContext();
-  console.log(isAuthenticated);
   const router = useRouter();
   if (isAuthenticated) {
     router.push("/dashboard");

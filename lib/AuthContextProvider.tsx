@@ -42,7 +42,10 @@ export default function AuthContextProvider({
 
   const logout = async () => {
     try {
-      await fetch("localhost:4000/admin/auth/logout", { method: "POST" });
+      await fetch("http://localhost:4000/admin/auth/logout", {
+        credentials: "include",
+        method: "POST",
+      });
       setIsAuthenticated(false);
     } catch (error) {
       console.error("Error logging out:", error);
