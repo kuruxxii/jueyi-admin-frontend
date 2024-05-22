@@ -42,6 +42,7 @@ export default function Page() {
     // console.log(values);
     try {
       const response = await fetch("http://localhost:4000/admin/auth/login", {
+        credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -103,7 +104,7 @@ export default function Page() {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Sign in</Button>
           </form>
         </Form>
       </div>
