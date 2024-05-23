@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ContextProviders from "@/lib/ContextProviders";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "觉意阅读后台",
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ContextProviders>{children}</ContextProviders>
+        <Toaster />
       </body>
     </html>
   );

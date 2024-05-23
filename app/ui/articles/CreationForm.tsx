@@ -23,6 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   slug: z.string().min(4).max(40),
@@ -37,6 +38,7 @@ const formSchema = z.object({
 });
 
 export function CreationForm() {
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -68,13 +70,19 @@ export function CreationForm() {
       });
       const json = await response.json();
       if (!response.ok) {
-        console.log(json.error);
+        toast({
+          variant: "destructive",
+          description: `出错啦！错误信息：${json.error}`,
+        });
       }
       if (response.ok) {
-        console.log(json);
+        toast({ description: `成功添加文章《${json.title}》` });
       }
     } catch (error) {
-      console.log(error);
+      toast({
+        variant: "destructive",
+        description: `出错啦！错误信息：${error}`,
+      });
     }
   }
   return (
