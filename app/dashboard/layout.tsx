@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import SideNav from "@/app/ui/dashboard/Sidenav";
 import { useAuthContext } from "@/lib/AuthContextProvider";
 import { useRouter } from "next/navigation";
@@ -7,8 +8,13 @@ import { useRouter } from "next/navigation";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuthContext();
   const router = useRouter();
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/");
+    }
+  }, [isAuthenticated, router]);
   if (!isAuthenticated) {
-    router.push("/");
+    return null;
   }
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
