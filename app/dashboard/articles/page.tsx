@@ -1,21 +1,33 @@
+"use client";
 // import Pagination from '@/app/ui/invoices/pagination';
-import Search from "@/app/ui/search";
+import Search from "@/app/ui/Search";
+import { useState, useEffect } from "react";
 import { CreateArticle } from "@/app/ui/articles/buttons";
-// import Table from '@/app/ui/invoices/table';
-// import { CreateInvoice } from '@/app/ui/invoices/buttons';
-// import { lusitana } from '@/app/ui/fonts';
+import ArticlesTable from "@/app/ui/articles/ArticlesTable";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 // import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
-// import { Suspense } from 'react';
-// import { fetchInvoicesPages } from '@/app/lib/data';
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: { query?: string; page?: string };
-}) {
-  const query = searchParams?.query;
-  const currentPage = Number(searchParams?.page) || 1;
-  // const totalPages = await fetchInvoicesPages(query);
+export default function Page() {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query");
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const [totalPages, setTotalPages] = useState<number>(0);
+  useEffect(() => {
+    const getFilteredArticlesTotalPages = async () => {
+      let url = `http://localhost:4000/admin/articles/pages`;
+      if (query) {
+        url += `?query=${query}`;
+      }
+      const response = await fetch(url, {
+        credentials: "include",
+        cache: "no-store",
+      });
+      const json = await response.json();
+      setTotalPages(json.totalPages);
+    };
+    getFilteredArticlesTotalPages();
+  }, [query]);
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
@@ -25,10 +37,8 @@ export default async function Page({
         <Search placeholder="Search articles..." />
         <CreateArticle />
       </div>
-      {/* <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-        <Table query={query} currentPage={currentPage} />
-      </Suspense>
-      <div className="mt-5 flex w-full justify-center">
+      <ArticlesTable query={query} currentPage={currentPage} />
+      {/* <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPages} />
       </div> */}
     </div>
