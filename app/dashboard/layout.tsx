@@ -1,6 +1,6 @@
 "use client";
 
-import SideNav from "@/app/ui/dashboard/sidenav";
+import SideNav from "@/app/ui/dashboard/Sidenav";
 import { useAuthContext } from "@/lib/AuthContextProvider";
 import { useRouter } from "next/navigation";
 
