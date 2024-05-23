@@ -17,6 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   username: z.string().min(3).max(20),
@@ -24,6 +25,7 @@ const formSchema = z.object({
 });
 
 export default function Page() {
+  const { toast } = useToast();
   const { isAuthenticated, login } = useAuthContext();
   const router = useRouter();
   useEffect(() => {
@@ -54,16 +56,20 @@ export default function Page() {
       });
       const json = await response.json();
       if (!response.ok) {
-        console.log(json.error);
+        toast({
+          variant: "destructive",
+          description: `出错啦！错误信息：${json.error}`,
+        });
       }
       if (response.ok) {
         login();
-        console.log(json);
-        // save the user to local storage
-        // localStorage.setItem('user', JSON.stringify(json))
+        toast({ description: `欢迎 ${json.admin} 来到觉意阅读后台！` });
       }
     } catch (error) {
-      console.log(error);
+      toast({
+        variant: "destructive",
+        description: `出错啦！错误信息：${error}`,
+      });
     }
   }
   return (
