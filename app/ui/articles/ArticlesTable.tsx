@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { format } from "date-fns";
+import { ModifyArticle } from "./buttons";
 
 type Article = {
   slug: string;
@@ -51,24 +52,28 @@ export default function ArticlesTable({
           <TableHead>话题分类</TableHead>
           <TableHead>作者</TableHead>
           <TableHead>创建时间</TableHead>
+          <TableHead className="w-44">操作</TableHead>
         </TableRow>
       </TableHeader>
       {articles?.map((article) => {
         return (
           <TableBody key={article.slug}>
             <TableRow>
-              <TableCell className="max-w-24 truncate">
+              <TableCell className="max-w-12 truncate">
                 {article.slug}
               </TableCell>
-              <TableCell className="max-w-24 truncate">
+              <TableCell className="max-w-16 truncate">
                 {article.title}
               </TableCell>
               <TableCell className="w-36">{article.topic}</TableCell>
-              <TableCell className="max-w-12 truncate">
+              <TableCell className="max-w-4 truncate">
                 {article.author}
               </TableCell>
-              <TableCell className="max-w-12">
+              <TableCell className="w-36">
                 {format(new Date(article.createdAt), "yyyy-MM-dd")}
+              </TableCell>
+              <TableCell className="flex justify-center">
+                <ModifyArticle slug={article.slug} />
               </TableCell>
             </TableRow>
           </TableBody>

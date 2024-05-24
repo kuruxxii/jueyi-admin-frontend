@@ -13,10 +13,10 @@ export function CreateArticle() {
   );
 }
 
-export function UpdateArticle({ id }: { id: string }) {
+export function ModifyArticle({ slug }: { slug: string }) {
   return (
     <Link
-      href={`/dashboard/articles/${id}/edit`}
+      href={`/dashboard/articles/${slug}/modify`}
       className="rounded-md border p-2 hover:bg-gray-100">
       <PencilIcon className="w-5" />
     </Link>
