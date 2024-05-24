@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { format } from "date-fns";
 
 type Article = {
   slug: string;
@@ -56,11 +57,19 @@ export default function ArticlesTable({
         return (
           <TableBody key={article.slug}>
             <TableRow>
-              <TableCell className="font-medium">{article.slug}</TableCell>
-              <TableCell>{article.title}</TableCell>
-              <TableCell>{article.topic}</TableCell>
-              <TableCell>{article.author}</TableCell>
-              <TableCell>{article.createdAt}</TableCell>
+              <TableCell className="max-w-24 truncate">
+                {article.slug}
+              </TableCell>
+              <TableCell className="max-w-24 truncate">
+                {article.title}
+              </TableCell>
+              <TableCell className="w-36">{article.topic}</TableCell>
+              <TableCell className="max-w-12 truncate">
+                {article.author}
+              </TableCell>
+              <TableCell className="max-w-12">
+                {format(new Date(article.createdAt), "yyyy-MM-dd")}
+              </TableCell>
             </TableRow>
           </TableBody>
         );

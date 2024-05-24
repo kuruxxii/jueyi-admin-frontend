@@ -27,7 +27,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   slug: z.string().min(4).max(40),
-  title: z.string().min(4).max(40),
+  title: z.string().min(4).max(30),
   coverUrl: z.string().url(),
   introduction: z.string().min(50).max(120),
   author: z.string().min(1).max(20),
@@ -98,7 +98,7 @@ export function CreationForm() {
                 <Input placeholder="Slug" {...field} />
               </FormControl>
               <FormDescription>
-                e.g., 《怎样致富》的slug是how-to-get-rich
+                小写英文字母；英文输入法短横线分隔
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -113,7 +113,7 @@ export function CreationForm() {
               <FormControl>
                 <Input placeholder="标题" {...field} />
               </FormControl>
-              <FormDescription>40字以内</FormDescription>
+              <FormDescription>30个字符以内</FormDescription>
               <FormMessage />
             </FormItem>
           )}
