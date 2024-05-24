@@ -1,12 +1,11 @@
 "use client";
-// import Pagination from '@/app/ui/invoices/pagination';
+
+import Pagination from "@/app/ui/Pagination";
 import Search from "@/app/ui/Search";
 import { useState, useEffect } from "react";
 import { CreateArticle } from "@/app/ui/articles/buttons";
 import ArticlesTable from "@/app/ui/articles/ArticlesTable";
-import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-// import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -38,9 +37,9 @@ export default function Page() {
         <CreateArticle />
       </div>
       <ArticlesTable query={query} currentPage={currentPage} />
-      {/* <div className="mt-5 flex w-full justify-center">
+      <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPages} />
-      </div> */}
+      </div>
     </div>
   );
 }
