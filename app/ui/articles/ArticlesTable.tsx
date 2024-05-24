@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { format } from "date-fns";
-import { ModifyArticle } from "./buttons";
+import { ModifyArticle, DeleteArticle } from "./buttons";
 
 type Article = {
   slug: string;
@@ -43,6 +43,11 @@ export default function ArticlesTable({
     };
     getFilteredArticles();
   }, [currentPage, query]);
+  const handleDeleteArticle = (slug: string) => {
+    setArticles((prevArticles) =>
+      prevArticles.filter((article) => article.slug !== slug)
+    );
+  };
   return (
     <Table>
       <TableHeader>
@@ -55,10 +60,10 @@ export default function ArticlesTable({
           <TableHead className="w-44">操作</TableHead>
         </TableRow>
       </TableHeader>
-      {articles?.map((article) => {
-        return (
-          <TableBody key={article.slug}>
-            <TableRow>
+      {articles ? (
+        <TableBody>
+          {articles.map((article) => (
+            <TableRow key={article.slug}>
               <TableCell className="max-w-12 truncate">
                 {article.slug}
               </TableCell>
@@ -72,13 +77,19 @@ export default function ArticlesTable({
               <TableCell className="w-36">
                 {format(new Date(article.createdAt), "yyyy-MM-dd")}
               </TableCell>
-              <TableCell className="flex justify-center">
+              <TableCell className="flex justify-left space-x-4">
                 <ModifyArticle slug={article.slug} />
+                <DeleteArticle
+                  slug={article.slug}
+                  onDelete={handleDeleteArticle}
+                />
               </TableCell>
             </TableRow>
-          </TableBody>
-        );
-      })}
+          ))}
+        </TableBody>
+      ) : (
+        <></>
+      )}
     </Table>
   );
 }

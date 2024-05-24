@@ -1,6 +1,19 @@
+"use client";
+
 import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-// import { deleteInvoice } from '@/app/lib/actions';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useToast } from "@/components/ui/use-toast";
 
 export function CreateArticle() {
   return (
@@ -23,14 +36,62 @@ export function ModifyArticle({ slug }: { slug: string }) {
   );
 }
 
-// export function DeleteInvoice({ id }: { id: string }) {
-//   const deleteInvoiceWithId = deleteInvoice.bind(null, id);
-//   return (
-//     <form action={deleteInvoiceWithId}>
-//       <button className="rounded-md border p-2 hover:bg-gray-100">
-//         <span className="sr-only">Delete</span>
-//         <TrashIcon className="w-5" />
-//       </button>
-//     </form>
-//   );
-// }
+export function DeleteArticle({
+  slug,
+  onDelete,
+}: {
+  slug: string;
+  onDelete: (slug: string) => void;
+}) {
+  const { toast } = useToast();
+  async function handleDelete(slug: string): Promise<void> {
+    try {
+      const response = await fetch(
+        `http://localhost:4000/admin/articles/${slug}`,
+        {
+          credentials: "include",
+          method: "DELETE",
+        }
+      );
+      const json = await response.json();
+      if (!response.ok) {
+        toast({
+          variant: "destructive",
+          description: `出错啦！错误信息：${json.error}`,
+        });
+      }
+      if (response.ok) {
+        toast({ description: "文章已删除" });
+        onDelete(slug);
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        description: `出错啦！错误信息：${error}`,
+      });
+    }
+  }
+  return (
+    <button className="rounded-md border p-2 hover:bg-gray-100">
+      <AlertDialog>
+        <AlertDialogTrigger>
+          <TrashIcon className="w-5" />
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>真的要删除这篇文章吗？</AlertDialogTitle>
+            <AlertDialogDescription>
+              此操作无法撤消。这将永久从我们的服务器中删除这篇文章。
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>取消</AlertDialogCancel>
+            <AlertDialogAction onClick={() => handleDelete(slug)}>
+              确认
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </button>
+  );
+}
