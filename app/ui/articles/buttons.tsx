@@ -72,7 +72,7 @@ export function DeleteArticle({
     }
   }
   return (
-    <button className="rounded-md border p-2 hover:bg-gray-100">
+    <div className="rounded-md border p-2 hover:bg-gray-100">
       <AlertDialog>
         <AlertDialogTrigger>
           <TrashIcon className="w-5" />
@@ -92,6 +92,6 @@ export function DeleteArticle({
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </button>
+    </div>
   );
 }
