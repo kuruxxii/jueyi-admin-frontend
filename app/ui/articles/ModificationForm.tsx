@@ -111,7 +111,7 @@ export function ModificationForm({ article }: { article: Article }) {
             <FormItem>
               <FormLabel>Slug</FormLabel>
               <FormControl>
-                <Input placeholder="Slug" {...field} />
+                <Input placeholder="Slug" disabled {...field} />
               </FormControl>
               <FormDescription>
                 小写英文字母；英文输入法短横线分隔
