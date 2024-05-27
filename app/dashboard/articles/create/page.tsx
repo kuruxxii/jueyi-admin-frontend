@@ -8,9 +8,9 @@ export default function Page() {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: "Articles", href: "/dashboard/articles" },
+          { label: "文章", href: "/dashboard/articles" },
           {
-            label: "Create Article",
+            label: "创建文章",
             href: "/dashboard/articles/create",
             active: true,
           },

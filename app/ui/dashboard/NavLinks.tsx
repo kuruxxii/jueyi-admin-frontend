@@ -11,15 +11,15 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
 const links = [
-  { name: "Data", href: "/dashboard", icon: ArrowTrendingUpIcon },
+  { name: "数据", href: "/dashboard", icon: ArrowTrendingUpIcon },
   {
-    name: "Articles",
+    name: "文章",
     href: "/dashboard/articles",
     icon: DocumentDuplicateIcon,
   },
-  { name: "Journals", href: "/dashboard/journals", icon: NewspaperIcon },
+  { name: "期刊", href: "/dashboard/journals", icon: NewspaperIcon },
 
-  { name: "Customers", href: "/dashboard/customers", icon: UserGroupIcon },
+  { name: "用户", href: "/dashboard/users", icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {

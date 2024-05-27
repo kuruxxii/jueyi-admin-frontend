@@ -246,7 +246,7 @@ export function ModificationForm({ article }: { article: Article }) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">提交</Button>
       </form>
     </Form>
   );
