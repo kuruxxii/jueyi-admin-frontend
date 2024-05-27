@@ -17,7 +17,7 @@ const links = [
     href: "/dashboard/articles",
     icon: DocumentDuplicateIcon,
   },
-  { name: "期刊", href: "/dashboard/journals", icon: NewspaperIcon },
+  { name: "周刊", href: "/dashboard/journals", icon: NewspaperIcon },
 
   { name: "用户", href: "/dashboard/users", icon: UserGroupIcon },
 ];
