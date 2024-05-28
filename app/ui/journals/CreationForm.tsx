@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,7 @@ const formSchema = z.object({
   coverUrl: z.string().url(),
   description: z.string().min(50).max(120),
   vol: z.coerce.number().nonnegative(),
+  articles: z.string().array().optional(),
 });
 
 export function CreationForm() {
@@ -33,8 +34,12 @@ export function CreationForm() {
       title: "",
       coverUrl: "",
       description: "",
-      // vol: ,
     },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "articles",
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -49,6 +54,7 @@ export function CreationForm() {
         body: JSON.stringify({
           ...values,
           vol: Number(values.vol),
+          articles: values.articles,
         }),
       });
       const json = await response.json();
@@ -127,7 +133,38 @@ export function CreationForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">提交</Button>
+        {fields.map((field, index) => (
+          <FormField
+            key={field.id}
+            control={form.control}
+            name={`articles.${index}`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>文章 {index + 1}</FormLabel>
+                <FormControl>
+                  <div className="flex items-center">
+                    <Input placeholder="文章的Slug" {...field} />
+                    <Button
+                      type="button"
+                      onClick={() => remove(index)}
+                      className="ml-2 bg-blue-600 transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                      删除
+                    </Button>
+                  </div>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        ))}
+        <Button
+          type="button"
+          onClick={() => append("")}
+          className="bg-blue-600 transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+          + 添加文章
+        </Button>
+        <Button type="submit" className="block mx-auto">
+          提交
+        </Button>
       </form>
     </Form>
   );
