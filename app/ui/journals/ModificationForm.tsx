@@ -30,7 +30,7 @@ const formSchema = z.object({
   title: z.string().min(4).max(30),
   coverUrl: z.string().url(),
   description: z.string().min(50).max(120),
-  vol: z.string().min(1),
+  vol: z.coerce.number().nonnegative(),
 });
 
 export function ModificationForm({ journal }: { journal: Journal }) {
@@ -41,7 +41,7 @@ export function ModificationForm({ journal }: { journal: Journal }) {
       title: journal.title,
       coverUrl: journal.coverUrl,
       description: journal.description,
-      vol: journal.description,
+      vol: journal.vol,
     },
   });
 
