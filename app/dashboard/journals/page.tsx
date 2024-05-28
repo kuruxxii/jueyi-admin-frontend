@@ -15,6 +15,7 @@ import {
   ModifyJournal,
   DeleteJournal,
 } from "@/app/ui/journals/buttons";
+import { format } from "date-fns";
 
 type Journal = {
   title: string;
@@ -83,7 +84,10 @@ export default function Page() {
           <Card key={journal.vol} className="relative">
             <CardHeader>
               <CardTitle>{`Vol. ${journal.vol}`}</CardTitle>
-              <CardDescription>{`${journal.createdAt}`}</CardDescription>
+              <CardDescription>{`${format(
+                new Date(journal.createdAt),
+                "yyyy-MM-dd"
+              )}`}</CardDescription>
             </CardHeader>
             <CardContent>
               <p>{journal.title}</p>
