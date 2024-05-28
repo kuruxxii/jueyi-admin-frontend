@@ -138,7 +138,12 @@ export function ModificationForm({ journal }: { journal: Journal }) {
             <FormItem>
               <FormLabel>期数 Vol.</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="期数 Vol." {...field} />
+                <Input
+                  disabled
+                  type="number"
+                  placeholder="期数 Vol."
+                  {...field}
+                />
               </FormControl>
               <FormDescription>{"期数 >= 0"}</FormDescription>
               <FormMessage />
