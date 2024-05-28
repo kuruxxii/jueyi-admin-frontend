@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/table";
 import { format } from "date-fns";
 import { ModifyArticle, DeleteArticle } from "./buttons";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 
 type Article = {
   slug: string;
@@ -65,7 +67,14 @@ export default function ArticlesTable({
           {articles.map((article) => (
             <TableRow key={article.slug}>
               <TableCell className="max-w-12 truncate">
-                {article.slug}
+                <div className="flex items-center gap-2">
+                  <button>
+                    <CopyToClipboard text={article.slug}>
+                      <DocumentDuplicateIcon className="w-5 text-slate-400 hover:text-slate-600 active:text-slate-950" />
+                    </CopyToClipboard>
+                  </button>
+                  {article.slug}
+                </div>
               </TableCell>
               <TableCell className="max-w-16 truncate">
                 {article.title}
