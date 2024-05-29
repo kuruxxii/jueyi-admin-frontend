@@ -29,8 +29,8 @@ const formSchema = z.object({
   slug: z.string().min(4).max(40),
   title: z.string().min(4).max(30),
   coverUrl: z.string().url(),
-  introduction: z.string().min(50).max(120),
-  author: z.string().min(1).max(20),
+  introduction: z.string().min(100).max(400),
+  author: z.string().min(1).max(30),
   read: z.string().min(1).max(2),
   topic: z.string().min(4),
   origin: z.string().min(1),
@@ -139,9 +139,9 @@ export function CreationForm() {
             <FormItem>
               <FormLabel>简介</FormLabel>
               <FormControl>
-                <Textarea {...field} />
+                <Textarea {...field} className="h-52" />
               </FormControl>
-              <FormDescription>120字以内</FormDescription>
+              <FormDescription>100-400字</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -155,7 +155,7 @@ export function CreationForm() {
               <FormControl>
                 <Input placeholder="作者" {...field} />
               </FormControl>
-              <FormDescription>20字以内</FormDescription>
+              <FormDescription>30个字符以内</FormDescription>
               <FormMessage />
             </FormItem>
           )}

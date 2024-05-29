@@ -29,7 +29,7 @@ type Journal = {
 const formSchema = z.object({
   title: z.string().min(4).max(30),
   coverUrl: z.string().url(),
-  description: z.string().min(50).max(120),
+  description: z.string().min(100).max(400),
   vol: z.coerce.number().nonnegative(),
   articles: z.string().array().optional(),
 });
@@ -126,7 +126,7 @@ export function ModificationForm({ journal }: { journal: Journal }) {
               <FormControl>
                 <Textarea {...field} />
               </FormControl>
-              <FormDescription>120字以内</FormDescription>
+              <FormDescription>100-400字</FormDescription>
               <FormMessage />
             </FormItem>
           )}
