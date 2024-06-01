@@ -5,6 +5,7 @@ import {
   DocumentDuplicateIcon,
   NewspaperIcon,
   UserGroupIcon,
+  ChatBubbleLeftEllipsisIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,6 +13,7 @@ import clsx from "clsx";
 
 const links = [
   { name: "数据", href: "/dashboard", icon: ArrowTrendingUpIcon },
+  { name: "通知", href: "/dashboard/news", icon: ChatBubbleLeftEllipsisIcon },
   {
     name: "文章",
     href: "/dashboard/articles",
