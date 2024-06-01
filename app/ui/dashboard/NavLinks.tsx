@@ -13,6 +13,7 @@ import clsx from "clsx";
 
 const links = [
   { name: "数据", href: "/dashboard", icon: ArrowTrendingUpIcon },
+  { name: "用户", href: "/dashboard/users", icon: UserGroupIcon },
   { name: "通知", href: "/dashboard/news", icon: ChatBubbleLeftEllipsisIcon },
   {
     name: "文章",
@@ -20,8 +21,6 @@ const links = [
     icon: DocumentDuplicateIcon,
   },
   { name: "周刊", href: "/dashboard/journals", icon: NewspaperIcon },
-
-  { name: "用户", href: "/dashboard/users", icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {

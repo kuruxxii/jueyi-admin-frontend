@@ -26,7 +26,7 @@ type Article = {
 
 export default function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  const [article, setArticles] = useState<Article | null>(null);
+  const [article, setArticle] = useState<Article | null>(null);
   useEffect(() => {
     const getAnArticle = async () => {
       let url = `http://localhost:4000/admin/articles/${slug}`;
@@ -35,7 +35,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         cache: "no-store",
       });
       const article = await response.json();
-      setArticles(article);
+      setArticle(article);
     };
     getAnArticle();
   }, [slug]);
@@ -43,9 +43,9 @@ export default function Page({ params }: { params: { slug: string } }) {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: "Articles", href: "/dashboard/articles" },
+          { label: "文章", href: "/dashboard/articles" },
           {
-            label: "Modify Article",
+            label: "修改文章",
             href: `/dashboard/articles/${slug}/modify`,
             active: true,
           },
