@@ -61,7 +61,7 @@ export function DeleteUser({
         });
       }
       if (response.ok) {
-        toast({ description: "文章已删除" });
+        toast({ description: "已删除该用户" });
         onDelete(email);
       }
     } catch (error) {
