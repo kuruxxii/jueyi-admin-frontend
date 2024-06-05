@@ -14,6 +14,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/components/ui/use-toast";
+import { HOST } from "@/lib/url";
 
 export function CreateArticle() {
   return (
@@ -46,13 +47,10 @@ export function DeleteArticle({
   const { toast } = useToast();
   async function handleDelete(slug: string): Promise<void> {
     try {
-      const response = await fetch(
-        `http://localhost:4000/admin/articles/${slug}`,
-        {
-          credentials: "include",
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`http://${HOST}/admin/articles/${slug}`, {
+        credentials: "include",
+        method: "DELETE",
+      });
       const json = await response.json();
       if (!response.ok) {
         toast({

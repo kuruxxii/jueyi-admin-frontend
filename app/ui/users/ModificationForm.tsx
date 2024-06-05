@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { HOST } from "@/lib/url";
 
 type User = {
   email: string;
@@ -46,17 +47,14 @@ export function ModificationForm({ user }: { user: User }) {
     // ✅ This will be type-safe and validated.
     // console.log(values);
     try {
-      const response = await fetch(
-        `http://localhost:4000/admin/users/${user.email}`,
-        {
-          credentials: "include",
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...values,
-          }),
-        }
-      );
+      const response = await fetch(`http://${HOST}/admin/users/${user.email}`, {
+        credentials: "include",
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...values,
+        }),
+      });
       const json = await response.json();
       if (!response.ok) {
         toast({

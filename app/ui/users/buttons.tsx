@@ -14,6 +14,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/components/ui/use-toast";
+import { HOST } from "@/lib/url";
 
 export function CreateUser() {
   return (
@@ -46,13 +47,10 @@ export function DeleteUser({
   const { toast } = useToast();
   async function handleDelete(email: string): Promise<void> {
     try {
-      const response = await fetch(
-        `http://localhost:4000/admin/users/${email}`,
-        {
-          credentials: "include",
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`http://${HOST}/admin/users/${email}`, {
+        credentials: "include",
+        method: "DELETE",
+      });
       const json = await response.json();
       if (!response.ok) {
         toast({

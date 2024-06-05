@@ -16,6 +16,7 @@ import {
   DeleteJournal,
 } from "@/app/ui/journals/buttons";
 import { format } from "date-fns";
+import { HOST } from "@/lib/url";
 
 type Journal = {
   title: string;
@@ -41,7 +42,7 @@ export default function Page() {
     const fetchPaginatedJournals = async (page: number) => {
       try {
         const response = await fetch(
-          `http://localhost:4000/admin/journals?page=${page}`,
+          `http://${HOST}/admin/journals?page=${page}`,
           {
             credentials: "include",
             cache: "no-store",

@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { CreateArticle } from "@/app/ui/articles/buttons";
 import ArticlesTable from "@/app/ui/articles/ArticlesTable";
 import { useSearchParams } from "next/navigation";
+import { HOST } from "@/lib/url";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -14,7 +15,7 @@ export default function Page() {
   const [totalPages, setTotalPages] = useState<number>(0);
   useEffect(() => {
     const getFilteredArticlesTotalPages = async () => {
-      let url = `http://localhost:4000/admin/articles/pages`;
+      let url = `http://${HOST}/admin/articles/pages`;
       if (query) {
         url += `?query=${query}`;
       }

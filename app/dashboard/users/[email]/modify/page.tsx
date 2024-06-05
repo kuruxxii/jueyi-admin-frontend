@@ -3,6 +3,7 @@
 import Breadcrumbs from "@/app/ui/Breadcrumbs";
 import { ModificationForm } from "@/app/ui/users/ModificationForm";
 import { useState, useEffect } from "react";
+import { HOST } from "@/lib/url";
 
 type User = {
   email: string;
@@ -18,7 +19,7 @@ export default function Page({ params }: { params: { email: string } }) {
   const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     const getAUser = async () => {
-      let url = `http://localhost:4000/admin/users/${email}`;
+      let url = `http://${HOST}/admin/users/${email}`;
       const response = await fetch(url, {
         credentials: "include",
         cache: "no-store",
