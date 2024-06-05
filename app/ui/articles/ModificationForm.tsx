@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
+import { HOST } from "@/lib/url";
 
 type Topic =
   | "个人成长"
@@ -73,7 +74,7 @@ export function ModificationForm({ article }: { article: Article }) {
     // console.log(values);
     try {
       const response = await fetch(
-        `http://localhost:4000/admin/articles/${article.slug}`,
+        `http://${HOST}/admin/articles/${article.slug}`,
         {
           credentials: "include",
           method: "PATCH",

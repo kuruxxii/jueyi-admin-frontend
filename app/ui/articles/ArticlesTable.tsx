@@ -13,6 +13,7 @@ import { format } from "date-fns";
 import { ModifyArticle, DeleteArticle } from "./buttons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
+import { HOST } from "@/lib/url";
 
 type Article = {
   slug: string;
@@ -32,7 +33,7 @@ export default function ArticlesTable({
   const [articles, setArticles] = useState<Article[]>([]);
   useEffect(() => {
     const getFilteredArticles = async () => {
-      let url = `http://localhost:4000/admin/articles?page=${currentPage}`;
+      let url = `http://${HOST}/admin/articles?page=${currentPage}`;
       if (query) {
         url += `&query=${query}`;
       }

@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
+import { HOST } from "@/lib/url";
 
 const formSchema = z.object({
   slug: z.string().min(4).max(40),
@@ -59,7 +60,7 @@ export function CreationForm() {
     // ✅ This will be type-safe and validated.
     // console.log(values);
     try {
-      const response = await fetch("http://localhost:4000/admin/articles", {
+      const response = await fetch(`http://${HOST}/admin/articles`, {
         credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },

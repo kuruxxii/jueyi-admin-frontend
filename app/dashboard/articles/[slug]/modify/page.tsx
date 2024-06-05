@@ -3,6 +3,7 @@
 import Breadcrumbs from "@/app/ui/Breadcrumbs";
 import { ModificationForm } from "@/app/ui/articles/ModificationForm";
 import { useState, useEffect } from "react";
+import { HOST } from "@/lib/url";
 
 type Topic =
   | "个人成长"
@@ -29,7 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [article, setArticle] = useState<Article | null>(null);
   useEffect(() => {
     const getAnArticle = async () => {
-      let url = `http://localhost:4000/admin/articles/${slug}`;
+      let url = `http://${HOST}/admin/articles/${slug}`;
       const response = await fetch(url, {
         credentials: "include",
         cache: "no-store",

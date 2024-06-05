@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { HOST } from "@/lib/url";
 
 const formSchema = z.object({
   username: z.string().min(3).max(20),
@@ -45,7 +46,7 @@ export default function Page() {
     // ✅ This will be type-safe and validated.
     // console.log(values);
     try {
-      const response = await fetch("http://localhost:4000/admin/auth/login", {
+      const response = await fetch(`http://${HOST}/admin/auth/login`, {
         credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },

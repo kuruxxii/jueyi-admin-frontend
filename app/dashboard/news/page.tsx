@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { HOST } from "@/lib/url";
 
 type News = {
   content: string[];
@@ -31,7 +32,7 @@ export default function NewsForm() {
   const [news, setNews] = useState<News>();
   useEffect(() => {
     const getNews = async () => {
-      let url = `http://localhost:4000/admin/news`;
+      let url = `http://${HOST}/admin/news`;
       const response = await fetch(url, {
         credentials: "include",
         cache: "no-store",
@@ -55,7 +56,7 @@ export default function NewsForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // console.log(values);
     try {
-      const response = await fetch(`http://localhost:4000/admin/news`, {
+      const response = await fetch(`http://${HOST}/admin/news`, {
         credentials: "include",
         method: "PATCH",
         headers: { "Content-Type": "application/json" },

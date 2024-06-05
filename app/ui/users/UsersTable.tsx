@@ -13,6 +13,7 @@ import { format } from "date-fns";
 import { ModifyUser, DeleteUser } from "./buttons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
+import { HOST } from "@/lib/url";
 
 type User = {
   email: string;
@@ -33,7 +34,7 @@ export default function UsersTable({
   const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {
     const getFilteredUsers = async () => {
-      let url = `http://localhost:4000/admin/users?page=${currentPage}`;
+      let url = `http://${HOST}/admin/users?page=${currentPage}`;
       if (query) {
         url += `&query=${query}`;
       }

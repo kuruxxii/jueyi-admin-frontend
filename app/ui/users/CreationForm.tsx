@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { HOST } from "@/lib/url";
 
 const formSchema = z.object({
   email: z.string().min(4).max(40),
@@ -37,7 +38,7 @@ export function CreationForm() {
     // ✅ This will be type-safe and validated.
     // console.log(values);
     try {
-      const response = await fetch("http://localhost:4000/admin/users", {
+      const response = await fetch(`http://${HOST}/admin/users`, {
         credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },

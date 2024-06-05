@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { HOST } from "@/lib/url";
 
 type Journal = {
   title: string;
@@ -57,7 +58,7 @@ export function ModificationForm({ journal }: { journal: Journal }) {
     // console.log(values);
     try {
       const response = await fetch(
-        `http://localhost:4000/admin/journals/${journal.vol}`,
+        `http://${HOST}/admin/journals/${journal.vol}`,
         {
           credentials: "include",
           method: "PATCH",

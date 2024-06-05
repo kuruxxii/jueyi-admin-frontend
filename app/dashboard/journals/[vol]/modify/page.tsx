@@ -3,6 +3,7 @@
 import Breadcrumbs from "@/app/ui/Breadcrumbs";
 import { ModificationForm } from "@/app/ui/journals/ModificationForm";
 import { useState, useEffect } from "react";
+import { HOST } from "@/lib/url";
 
 type Journal = {
   title: string;
@@ -17,7 +18,7 @@ export default function Page({ params }: { params: { vol: number } }) {
   const [journal, setJournal] = useState<Journal | null>(null);
   useEffect(() => {
     const getAJournal = async () => {
-      let url = `http://localhost:4000/admin/journals/${vol}`;
+      let url = `http://${HOST}/admin/journals/${vol}`;
       const response = await fetch(url, {
         credentials: "include",
         cache: "no-store",

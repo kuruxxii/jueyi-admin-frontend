@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { HOST } from "@/lib/url";
 
 const formSchema = z.object({
   title: z.string().min(4).max(30),
@@ -47,7 +48,7 @@ export function CreationForm() {
     // ✅ This will be type-safe and validated.
     // console.log(values);
     try {
-      const response = await fetch("http://localhost:4000/admin/journals", {
+      const response = await fetch(`http://${HOST}/admin/journals`, {
         credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },
