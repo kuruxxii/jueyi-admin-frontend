@@ -51,7 +51,7 @@ export default function NewsForm() {
   });
   const { fields, append, remove } = useFieldArray({
     control: form.control,
-    name: "content",
+    name: "content" as never,
   });
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // console.log(values);
