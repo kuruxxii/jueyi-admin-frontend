@@ -49,7 +49,7 @@ export function ModificationForm({ journal }: { journal: Journal }) {
   });
   const { fields, append, remove } = useFieldArray({
     control: form.control,
-    name: "articles",
+    name: "articles" as never,
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {

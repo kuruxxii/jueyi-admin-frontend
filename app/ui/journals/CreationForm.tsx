@@ -40,7 +40,7 @@ export function CreationForm() {
 
   const { fields, append, remove } = useFieldArray({
     control: form.control,
-    name: "articles",
+    name: "articles" as never,
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
